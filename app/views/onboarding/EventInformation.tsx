@@ -1,22 +1,27 @@
+import { useQueryClient } from '@tanstack/react-query'
 import { Button, StyleSheet, Text, TextInput } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { setOnboardingStatus } from '../../api/services/onboarding.service'
 import type EventModel from '../../models/EventModel'
 import { OnboardingStatus } from '../../utils/enums/OnboardingStatus'
 
 type EventInformationProps = {
-  setOnboardingStatus: (status: OnboardingStatus) => void
   onboardingEvent: EventModel
   setOnboardingEvent: (event: EventModel) => void
 }
 
 const EventInformation = (props: EventInformationProps) => {
-  const { setOnboardingStatus, onboardingEvent, setOnboardingEvent } = props
+  const { onboardingEvent, setOnboardingEvent } = props
+  const queryClient = useQueryClient()
 
-  const handlePress = () => {
+  const handlePress = async () => {
     if (onboardingEvent.title === '') {
       return
     }
-    setOnboardingStatus(OnboardingStatus.EventDateTime)
+    await setOnboardingStatus(OnboardingStatus.EventDateTime)
+    await queryClient.invalidateQueries({
+      queryKey: ['onboardingStatus'],
+    })
   }
 
   return (

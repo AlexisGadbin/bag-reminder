@@ -1,23 +1,28 @@
 import RNDateTimePicker from '@react-native-community/datetimepicker'
+import { useQueryClient } from '@tanstack/react-query'
 import { Button, StyleSheet, Text } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { setOnboardingStatus } from '../../api/services/onboarding.service'
 import type EventModel from '../../models/EventModel'
 import { OnboardingStatus } from '../../utils/enums/OnboardingStatus'
 
 type EventDateTimeProps = {
-  setOnboardingStatus: (status: OnboardingStatus) => void
   onboardingEvent: EventModel
   setOnboardingEvent: (event: EventModel) => void
 }
 
 const EventDateTime = (props: EventDateTimeProps) => {
-  const { setOnboardingStatus, onboardingEvent, setOnboardingEvent } = props
+  const { onboardingEvent, setOnboardingEvent } = props
+  const queryClient = useQueryClient()
 
-  const handlePress = () => {
+  const handlePress = async () => {
     if (onboardingEvent.date < new Date()) {
       return
     }
-    setOnboardingStatus(OnboardingStatus.RemindedObjects)
+    await setOnboardingStatus(OnboardingStatus.RemindedObjects)
+    await queryClient.invalidateQueries({
+      queryKey: ['onboardingStatus'],
+    })
   }
 
   return (

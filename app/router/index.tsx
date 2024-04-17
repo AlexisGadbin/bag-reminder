@@ -1,7 +1,10 @@
-import { useAsyncStorage } from '@react-native-async-storage/async-storage'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { useEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { Text } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { getOnboardingStatus } from '../api/services/onboarding.service'
+import { OnboardingStatus } from '../utils/enums/OnboardingStatus'
 import Home from '../views/Home'
 import Onboarding from '../views/onboarding'
 
@@ -13,24 +16,37 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
 const Router = () => {
-  const { getItem } = useAsyncStorage('onboardingStatus')
-  const [onboardingStatus, setOnboardingStatus] = useState<string | null>(null)
+  // useEffect(() => {
+  //   const getOnboardingStatus = async () => {
+  //     const storedStatus = await getItem()
+  //     console.log('storedStatus', storedStatus)
+  //     setOnboardingStatus(storedStatus)
+  //   }
 
-  useEffect(() => {
-    const getOnboardingStatus = async () => {
-      const onboardingStatus = await getItem()
-      setOnboardingStatus(onboardingStatus)
-    }
+  //   getOnboardingStatus().catch(() => {
+  //     setOnboardingStatus('uncompleted')
+  //   })
+  // }, [getItem])
 
-    getOnboardingStatus().catch(() => {
-      setOnboardingStatus('uncompleted')
-    })
-  }, [getItem])
+  const { data: onBoardingStatus } = useQuery({
+    queryKey: ['onboardingStatus'],
+    queryFn: getOnboardingStatus,
+  })
+
+  console.log('onBoardingStatus', onBoardingStatus)
+
+  if (onBoardingStatus === undefined) {
+    return (
+      <SafeAreaView>
+        <Text>Loading...</Text>
+      </SafeAreaView>
+    )
+  }
 
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={onboardingStatus === 'completed' ? 'Home' : 'Onboarding'}
+        initialRouteName={onBoardingStatus === OnboardingStatus.Completed ? 'Home' : 'Onboarding'}
         screenOptions={{
           headerShown: false,
         }}
