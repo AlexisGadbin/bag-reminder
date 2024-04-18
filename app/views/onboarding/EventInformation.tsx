@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query'
-import { Button, StyleSheet, Text, TextInput } from 'react-native'
+import { Button, StyleSheet, TextInput } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { setOnboardingStatus } from '../../api/services/onboarding.service'
 import type EventModel from '../../models/EventModel'
@@ -26,7 +26,6 @@ const EventInformation = (props: EventInformationProps) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>EventInformation</Text>
       <TextInput
         placeholder="Event Name"
         id="title"

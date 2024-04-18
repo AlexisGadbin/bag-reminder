@@ -22,12 +22,13 @@ const Home = () => {
       {events?.map((event) => (
         <View key={event.title}>
           <Text>{event.title}</Text>
-          <Text>{event.date.toString()}</Text>
           {event.objects.map((object) => (
             <Text key={object.name}>
               {object.name} - {object.amount}
             </Text>
           ))}
+          <Text>{event.repeat.days.join(', ')}</Text>
+          <Text>{event.repeat.hour.toString()}</Text>
         </View>
       ))}
     </SafeAreaView>

@@ -16,18 +16,6 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
 const Router = () => {
-  // useEffect(() => {
-  //   const getOnboardingStatus = async () => {
-  //     const storedStatus = await getItem()
-  //     console.log('storedStatus', storedStatus)
-  //     setOnboardingStatus(storedStatus)
-  //   }
-
-  //   getOnboardingStatus().catch(() => {
-  //     setOnboardingStatus('uncompleted')
-  //   })
-  // }, [getItem])
-
   const { data: onBoardingStatus } = useQuery({
     queryKey: ['onboardingStatus'],
     queryFn: getOnboardingStatus,

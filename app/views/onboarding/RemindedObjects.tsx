@@ -18,7 +18,7 @@ type RemindedObjectsProps = {
 
 const RemindedObjects = (props: RemindedObjectsProps) => {
   const { onboardingEvent, setOnboardingEvent, navigation } = props
-  const [object, setObject] = useState<ObjectModel>({ name: '', amount: 0 })
+  const [object, setObject] = useState<ObjectModel>({ name: '', amount: -1 })
 
   const saveEventMutation = useMutation({
     mutationFn: addEvent,
@@ -29,14 +29,14 @@ const RemindedObjects = (props: RemindedObjectsProps) => {
   })
 
   const handleAddObject = () => {
-    if (object.name === '' || object.amount === 0) {
+    if (object.name === '' || object.amount <= 0) {
       return
     }
     setOnboardingEvent({
       ...onboardingEvent,
       objects: [...onboardingEvent.objects, object],
     })
-    setObject({ name: '', amount: 0 })
+    setObject({ name: '', amount: -1 })
   }
 
   const handlePress = () => {
@@ -63,9 +63,9 @@ const RemindedObjects = (props: RemindedObjectsProps) => {
         placeholder="Amount"
         keyboardType="numeric"
         onChangeText={(text) => {
-          setObject({ ...object, amount: parseInt(text) })
+          setObject({ ...object, amount: text === '' ? -1 : parseInt(text) })
         }}
-        value={object.amount.toString()}
+        value={object.amount === -1 ? undefined : object.amount.toString()}
       />
       <Button title="Add" onPress={handleAddObject} />
       {onboardingEvent.objects.map((object, index) => (

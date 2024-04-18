@@ -1,8 +1,9 @@
 import type ObjectModel from './Object'
+import type RepeatModel from './Repeat'
 
 type EventModel = {
   title: string
-  date: Date
+  repeat: RepeatModel
   objects: ObjectModel[]
 }
 
