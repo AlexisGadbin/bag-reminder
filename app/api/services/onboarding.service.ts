@@ -3,7 +3,7 @@ import { OnboardingStatus } from '../../utils/enums/OnboardingStatus'
 
 export const getOnboardingStatus = async (): Promise<OnboardingStatus> => {
   const storedStatus = await AsyncStorage.getItem('onboardingStatus')
-  return (storedStatus as OnboardingStatus) ?? OnboardingStatus.EventInformation
+  return (storedStatus as OnboardingStatus) ?? OnboardingStatus.EVENT_INFORMATION
 }
 
 export const setOnboardingStatus = async (status: OnboardingStatus): Promise<void> => {
