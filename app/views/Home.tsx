@@ -19,11 +19,11 @@ const Home = () => {
     <SafeAreaView>
       <Text>Home</Text>
       <Button title="Reset onboarding status" onPress={handlePress} />
-      {events?.map((event) => (
-        <View key={event.title}>
+      {events?.map((event, index) => (
+        <View key={`event ${event.title}_${index}`}>
           <Text>{event.title}</Text>
-          {event.objects.map((object) => (
-            <Text key={object.name}>
+          {event.objects.map((object, index) => (
+            <Text key={`object ${object.name}_${index}`}>
               {object.name} - {object.amount}
             </Text>
           ))}
