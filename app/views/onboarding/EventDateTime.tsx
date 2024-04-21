@@ -42,8 +42,8 @@ const EventDateTime = (props: EventDateTimeProps) => {
           <View key={day}>
             <Checkbox
               value={repeat.days.includes(Days[day])}
-              onValueChange={(newValue) => {
-                if (newValue) {
+              onValueChange={(isChecked) => {
+                if (isChecked) {
                   setRepeat({
                     ...repeat,
                     days: [...repeat.days, Days[day]],
@@ -64,11 +64,11 @@ const EventDateTime = (props: EventDateTimeProps) => {
       <RNDateTimePicker
         mode="countdown"
         value={onboardingEvent.repeat.hour.toJSDate()}
-        onChange={(_, selectedHour) => {
-          if (selectedHour != null) {
+        onChange={(_, selectedTime) => {
+          if (selectedTime != null) {
             setRepeat({
               ...repeat,
-              hour: DateTime.fromJSDate(selectedHour),
+              hour: DateTime.fromJSDate(selectedTime),
             })
           }
         }}
