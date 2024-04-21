@@ -29,18 +29,18 @@ const Onboarding = (props: OnboardingProps) => {
   })
 
   switch (onBoardingStatus) {
-    case OnboardingStatus.EventInformation:
+    case OnboardingStatus.EVENT_INFORMATION:
       return (
         <EventInformation
           onboardingEvent={onboardingEvent}
           setOnboardingEvent={setOnboardingEvent}
         />
       )
-    case OnboardingStatus.EventDateTime:
+    case OnboardingStatus.EVENT_DATE_TIME:
       return (
         <EventDateTime onboardingEvent={onboardingEvent} setOnboardingEvent={setOnboardingEvent} />
       )
-    case OnboardingStatus.RemindedObjects:
+    case OnboardingStatus.REMINDED_OBJECTS:
       return (
         <RemindedObjects
           onboardingEvent={onboardingEvent}

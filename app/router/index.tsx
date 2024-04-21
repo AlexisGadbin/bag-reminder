@@ -21,8 +21,6 @@ const Router = () => {
     queryFn: getOnboardingStatus,
   })
 
-  console.log('onBoardingStatus', onBoardingStatus)
-
   if (onBoardingStatus === undefined) {
     return (
       <SafeAreaView>
@@ -34,7 +32,7 @@ const Router = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={onBoardingStatus === OnboardingStatus.Completed ? 'Home' : 'Onboarding'}
+        initialRouteName={onBoardingStatus === OnboardingStatus.COMPLETED ? 'Home' : 'Onboarding'}
         screenOptions={{
           headerShown: false,
         }}

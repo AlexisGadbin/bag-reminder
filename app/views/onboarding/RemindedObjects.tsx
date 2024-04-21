@@ -23,7 +23,7 @@ const RemindedObjects = (props: RemindedObjectsProps) => {
   const saveEventMutation = useMutation({
     mutationFn: addEvent,
     onSuccess: async () => {
-      await setOnboardingStatus(OnboardingStatus.Completed)
+      await setOnboardingStatus(OnboardingStatus.COMPLETED)
       navigation.replace('Home')
     },
   })

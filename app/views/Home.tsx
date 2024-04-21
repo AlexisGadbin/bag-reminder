@@ -7,7 +7,7 @@ import { OnboardingStatus } from '../utils/enums/OnboardingStatus'
 
 const Home = () => {
   const handlePress = async () => {
-    void setOnboardingStatus(OnboardingStatus.EventInformation)
+    void setOnboardingStatus(OnboardingStatus.EVENT_INFORMATION)
   }
 
   const { data: events } = useQuery({

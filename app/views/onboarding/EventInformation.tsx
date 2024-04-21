@@ -18,7 +18,7 @@ const EventInformation = (props: EventInformationProps) => {
     if (onboardingEvent.title === '') {
       return
     }
-    await setOnboardingStatus(OnboardingStatus.EventDateTime)
+    await setOnboardingStatus(OnboardingStatus.EVENT_DATE_TIME)
     await queryClient.invalidateQueries({
       queryKey: ['onboardingStatus'],
     })

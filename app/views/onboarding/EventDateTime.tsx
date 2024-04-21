@@ -29,7 +29,7 @@ const EventDateTime = (props: EventDateTimeProps) => {
       repeat,
     })
 
-    await setOnboardingStatus(OnboardingStatus.RemindedObjects)
+    await setOnboardingStatus(OnboardingStatus.REMINDED_OBJECTS)
     await queryClient.invalidateQueries({
       queryKey: ['onboardingStatus'],
     })

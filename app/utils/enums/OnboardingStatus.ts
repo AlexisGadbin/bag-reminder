@@ -1,6 +1,6 @@
 export enum OnboardingStatus {
-  'EventInformation' = 'EventInformation',
-  'EventDateTime' = 'EventDateTime',
-  'RemindedObjects' = 'RemindedObjects',
-  'Completed' = 'Completed',
+  EVENT_INFORMATION = 'EventInformation',
+  EVENT_DATE_TIME = 'EventDateTime',
+  REMINDED_OBJECTS = 'RemindedObjects',
+  COMPLETED = 'Completed',
 }
